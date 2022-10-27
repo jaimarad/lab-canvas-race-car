@@ -7,6 +7,7 @@ class Obstacle {
   }
 
   drawObstacle() {
+    ctx.fillStyle = 'red'
     ctx.beginPath();
     ctx.rect(this.x, this.y, this.width, this.height);
     ctx.fill();

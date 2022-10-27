@@ -11,7 +11,8 @@ const bg = new Background();
 const car = new Car();
 const obstacles = [];
 const flag = true;
-keys = {
+
+const keys = {
   keyLeftPressed: false,
   keyRightPressed: false,
   keyUpPressed: false,
@@ -20,18 +21,18 @@ keys = {
 
 window.onload = () => {
   document.getElementById("start-button").onclick = () => {
-    startGame();
-    if (flag) {
-      intervalId = setInterval(refreshScreen, 20);
-      flag = false;
-    }
+    // startGame();
+    // if (flag) {
+    intervalId = setInterval(refreshScreen, 20);
+    //   flag = false;
+    // }
     // refreshScreen()
   };
 
-  function startGame() {
-    bg.drawBg();
-    car.drawCar();
-  }
+  // function startGame() {
+  //   bg.drawBg();
+  //   car.drawCar();
+  // }
 
   function refreshScreen() {
     // Move player each frame
@@ -40,10 +41,16 @@ window.onload = () => {
     if (keys.keyUpPressed) car.moveUp();
     if (keys.keyDownPressed) car.moveDown();
 
+    // count the frames that have passed
     frame += 1;
+    // clean page and then paint because if not everything is painted on top of the previous
     clearScreen();
+
+    // draw background
     bg.drawBg();
+    // draw car
     car.drawCar();
+    car.drawScore()
 
     // Obstacles
     if (frame % 120 === 0) {
@@ -54,8 +61,11 @@ window.onload = () => {
     obstacles.forEach((obstacle) => {
       obstacle.drawObstacle();
       obstacle.moveDown();
+      car.checkCollision(obstacle.x, obstacle.y);
       if (car.checkCollision(obstacle.x, obstacle.y)) {
         console.log("Game Over");
+        console.log(car.score)
+        obstacles.shift();
         gameOver();
       }
       if (obstacle.checkIfOut()) {
@@ -108,5 +118,7 @@ function clearScreen() {
 
 function gameOver() {
   clearInterval(intervalId);
-  setTimeout(() => location.reload(), 1000);
+  const end = new finalScore()
+  end.drawFinalPage(car.score)
+  setTimeout(() => location.reload(), 5000);
 }

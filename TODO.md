@@ -4,12 +4,12 @@
 
 - Por que el load hace que tengas que hacer doble click para que funcionen las cosas
 
-- Colision con el coche
+- Colision con el coche DONE
 
-- Smooth controls
+- Smooth controls DONE
 
-- drawObstacle the ctx and canvas has to be initialize each time?
+- drawObstacle the ctx and canvas has to be initialize each time? DONE
 
 - multiple hits (no importa en este caso porque al primer caso se acaba el juego)
 
-- Problemas de hitbox del coche
+- Problemas de hitbox del coche DONE
